@@ -119,8 +119,8 @@ export function OutilsSection() {
                 <div className="relative mt-2 flex h-56 items-center justify-center">
                   <div
                     aria-hidden
-                    className="absolute inset-x-6 bottom-4 h-8 rounded-full blur-2xl transition-opacity duration-500 group-hover:opacity-80"
-                    style={{ background: "oklch(0.55 0.08 185 / 0.35)" }}
+                    className="absolute inset-x-6 bottom-4 h-8 rounded-full blur-2xl transition-all duration-500 group-hover:h-10 group-hover:opacity-90"
+                    style={{ background: "oklch(0.55 0.08 185 / 0.45)" }}
                   />
                   <img
                     src={tool.image}
@@ -128,7 +128,7 @@ export function OutilsSection() {
                     width={1024}
                     height={1024}
                     loading="lazy"
-                    className="relative h-full w-auto object-contain drop-shadow-xl transition-transform duration-700 group-hover:scale-110 group-hover:rotate-3"
+                    className="relative h-full w-auto object-contain drop-shadow-xl transition-transform duration-700 ease-out group-hover:scale-[1.08] group-hover:-rotate-2"
                   />
                 </div>
 
