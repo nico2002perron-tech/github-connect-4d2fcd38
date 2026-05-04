@@ -9,20 +9,24 @@ const tools = [
     label: "Projections",
     image: projectionsImg,
     accent: "Croissance long terme",
+    animClass: "anim-calc",
   },
   {
     icon: Calendar,
     label: "Budget",
     image: budgetImg,
     accent: "Suivi mensuel",
+    animClass: "anim-calendar",
   },
   {
     icon: Target,
     label: "Objectifs",
     image: objectifsImg,
     accent: "Atteindre vos cibles",
+    animClass: "anim-target",
   },
 ];
+
 
 export function OutilsSection() {
   return (
