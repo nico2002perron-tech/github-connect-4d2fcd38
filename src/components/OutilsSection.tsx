@@ -1,8 +1,7 @@
-import { useEffect, useRef, useState } from "react";
 import projectionsImg from "@/assets/tool-projections.png";
 import budgetImg from "@/assets/tool-budget.png";
 import objectifsImg from "@/assets/tool-objectifs.png";
-import { ArrowRight, TrendingUp, Calendar, Target, Sparkles } from "lucide-react";
+import { ArrowRight, TrendingUp, Calendar, Target } from "lucide-react";
 
 const tools = [
   {
@@ -10,104 +9,22 @@ const tools = [
     label: "Projections",
     image: projectionsImg,
     accent: "Croissance long terme",
-    description:
-      "Simulez l'évolution de votre patrimoine sur 5, 10 ou 30 ans en quelques clics.",
-    badge: "+15% d'épargne en moyenne",
-    animClass: "anim-calc",
   },
   {
     icon: Calendar,
     label: "Budget",
     image: budgetImg,
     accent: "Suivi mensuel",
-    description:
-      "Catégorisez vos dépenses et identifiez où récupérer du pouvoir d'achat chaque mois.",
-    badge: "Utilisé par 2 000+ foyers",
-    animClass: "anim-calendar",
   },
   {
     icon: Target,
     label: "Objectifs",
     image: objectifsImg,
     accent: "Atteindre vos cibles",
-    description:
-      "Fixez un objectif (achat, voyage, retraite) et suivez votre progression au jour le jour.",
-    badge: "92 % atteignent leur cible",
-    animClass: "anim-target",
   },
 ];
 
-function TiltCard({
-  children,
-  className,
-  ...rest
-}: React.HTMLAttributes<HTMLAnchorElement> & { href: string; "aria-label"?: string }) {
-  const ref = useRef<HTMLAnchorElement>(null);
-
-  const onMove = (e: React.MouseEvent<HTMLAnchorElement>) => {
-    const el = ref.current;
-    if (!el) return;
-    const rect = el.getBoundingClientRect();
-    const px = (e.clientX - rect.left) / rect.width;
-    const py = (e.clientY - rect.top) / rect.height;
-    const rx = (py - 0.5) * -8;
-    const ry = (px - 0.5) * 10;
-    el.style.setProperty("--rx", `${rx}deg`);
-    el.style.setProperty("--ry", `${ry}deg`);
-    el.style.setProperty("--mx", `${px * 100}%`);
-    el.style.setProperty("--my", `${py * 100}%`);
-  };
-
-  const onLeave = () => {
-    const el = ref.current;
-    if (!el) return;
-    el.style.setProperty("--rx", `0deg`);
-    el.style.setProperty("--ry", `0deg`);
-  };
-
-  return (
-    <a
-      ref={ref}
-      onMouseMove={onMove}
-      onMouseLeave={onLeave}
-      className={className}
-      style={{
-        transform:
-          "perspective(1000px) rotateX(var(--rx,0deg)) rotateY(var(--ry,0deg))",
-        transformStyle: "preserve-3d",
-        transition: "transform 0.4s cubic-bezier(0.2, 0.8, 0.2, 1)",
-      }}
-      {...rest}
-    >
-      {children}
-    </a>
-  );
-}
-
-function useInView<T extends HTMLElement>() {
-  const ref = useRef<T>(null);
-  const [inView, setInView] = useState(false);
-  useEffect(() => {
-    const el = ref.current;
-    if (!el) return;
-    const obs = new IntersectionObserver(
-      ([entry]) => {
-        if (entry.isIntersecting) {
-          setInView(true);
-          obs.disconnect();
-        }
-      },
-      { threshold: 0.15 },
-    );
-    obs.observe(el);
-    return () => obs.disconnect();
-  }, []);
-  return { ref, inView };
-}
-
 export function OutilsSection() {
-  const { ref: gridRef, inView } = useInView<HTMLDivElement>();
-
   return (
     <section className="relative w-full px-4 py-20 md:py-28">
       <div
@@ -130,16 +47,6 @@ export function OutilsSection() {
           aria-hidden
           className="pointer-events-none absolute -bottom-24 -right-24 h-72 w-72 rounded-full opacity-40 blur-3xl"
           style={{ background: "oklch(0.88 0.08 220 / 0.5)" }}
-        />
-        {/* subtle grid texture */}
-        <div
-          aria-hidden
-          className="pointer-events-none absolute inset-0 opacity-[0.04]"
-          style={{
-            backgroundImage:
-              "linear-gradient(oklch(0.3 0.1 230) 1px, transparent 1px), linear-gradient(90deg, oklch(0.3 0.1 230) 1px, transparent 1px)",
-            backgroundSize: "32px 32px",
-          }}
         />
 
         <div className="relative flex flex-col items-center text-center">
@@ -171,35 +78,26 @@ export function OutilsSection() {
         </div>
 
         {/* Tool cards */}
-        <div
-          ref={gridRef}
-          className="relative mt-14 grid gap-6 md:grid-cols-3"
-        >
-          {tools.map((tool, i) => {
+        <div className="relative mt-14 grid gap-6 md:grid-cols-3">
+          {tools.map((tool) => {
             const Icon = tool.icon;
             return (
-              <TiltCard
+              <a
                 key={tool.label}
                 href="/compas.html"
-                aria-label={`Découvrir l'outil ${tool.label}`}
-                className="group relative flex flex-col overflow-hidden rounded-3xl bg-white p-6 will-change-transform hover:[box-shadow:0_30px_60px_-20px_oklch(0.6_0.18_230/0.35),0_0_0_1px_oklch(0.6_0.18_230/0.2)]"
+                className="group relative flex flex-col overflow-hidden rounded-3xl bg-white p-6 transition-all duration-500 ease-out hover:-translate-y-2 hover:[box-shadow:0_30px_60px_-20px_oklch(0.6_0.18_230/0.35),0_0_0_1px_oklch(0.6_0.18_230/0.2)]"
                 style={{
                   boxShadow:
                     "0 10px 30px -15px oklch(0.4 0.1 230 / 0.18), 0 0 0 1px oklch(0.9 0.02 225)",
-                  opacity: inView ? 1 : 0,
-                  transform: inView
-                    ? "perspective(1000px) translateY(0) rotateX(var(--rx,0deg)) rotateY(var(--ry,0deg))"
-                    : "perspective(1000px) translateY(30px)",
-                  transition: `opacity 0.7s ease-out ${i * 120}ms, transform 0.7s cubic-bezier(0.2,0.8,0.2,1) ${i * 120}ms`,
                 }}
               >
-                {/* cursor-following spotlight */}
+                {/* subtle radial shine on hover */}
                 <div
                   aria-hidden
-                  className="pointer-events-none absolute inset-0 rounded-3xl opacity-0 transition-opacity duration-500 group-hover:opacity-100"
+                  className="pointer-events-none absolute -top-1/3 left-1/2 h-[120%] w-[120%] -translate-x-1/2 opacity-0 transition-opacity duration-700 group-hover:opacity-100"
                   style={{
                     background:
-                      "radial-gradient(400px circle at var(--mx,50%) var(--my,50%), oklch(0.85 0.12 225 / 0.35), transparent 60%)",
+                      "radial-gradient(circle at 50% 30%, oklch(0.85 0.12 225 / 0.4) 0%, transparent 60%)",
                   }}
                 />
                 {/* diagonal sheen sweep */}
@@ -211,10 +109,7 @@ export function OutilsSection() {
                 </div>
 
                 {/* header row */}
-                <div
-                  className="relative z-10 flex items-center justify-between"
-                  style={{ transform: "translateZ(40px)" }}
-                >
+                <div className="relative z-10 flex items-center justify-between">
                   <div
                     className="inline-flex items-center gap-2 rounded-full px-3 py-1.5 text-xs font-semibold"
                     style={{
@@ -232,10 +127,7 @@ export function OutilsSection() {
                 </div>
 
                 {/* 3D image */}
-                <div
-                  className="relative mt-2 flex h-48 items-center justify-center [perspective:1000px]"
-                  style={{ transform: "translateZ(60px)" }}
-                >
+                <div className="relative mt-2 flex h-56 items-center justify-center">
                   <div
                     aria-hidden
                     className="absolute inset-x-6 bottom-4 h-8 rounded-full blur-2xl transition-all duration-500 group-hover:h-10 group-hover:opacity-90"
@@ -243,46 +135,22 @@ export function OutilsSection() {
                   />
                   <img
                     src={tool.image}
-                    alt=""
+                    alt={tool.label}
                     width={1024}
                     height={1024}
                     loading="lazy"
-                    className={`relative h-full w-auto object-contain drop-shadow-xl float-idle ${tool.animClass}`}
+                    className="relative h-full w-auto object-contain drop-shadow-xl transition-transform duration-700 ease-out group-hover:scale-[1.08] group-hover:-rotate-2"
                   />
                 </div>
 
-                {/* description + badge */}
+                {/* footer accent */}
                 <div
-                  className="relative z-10 mt-2 flex flex-1 flex-col"
-                  style={{ transform: "translateZ(30px)" }}
+                  className="mt-2 text-xs font-semibold uppercase tracking-wider"
+                  style={{ color: "oklch(0.55 0.05 240)" }}
                 >
-                  <p
-                    className="text-sm leading-relaxed"
-                    style={{ color: "oklch(0.4 0.03 250)" }}
-                  >
-                    {tool.description}
-                  </p>
-
-                  <div className="mt-4 flex items-center justify-between gap-2">
-                    <span
-                      className="inline-flex items-center gap-1.5 rounded-full px-2.5 py-1 text-[11px] font-semibold"
-                      style={{
-                        background: "oklch(0.97 0.02 225)",
-                        color: "oklch(0.45 0.15 230)",
-                      }}
-                    >
-                      <Sparkles className="h-3 w-3" strokeWidth={2.5} />
-                      {tool.badge}
-                    </span>
-                    <span
-                      className="text-[10px] font-semibold uppercase tracking-wider"
-                      style={{ color: "oklch(0.6 0.04 240)" }}
-                    >
-                      {tool.accent}
-                    </span>
-                  </div>
+                  {tool.accent}
                 </div>
-              </TiltCard>
+              </a>
             );
           })}
         </div>
