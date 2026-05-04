@@ -85,70 +85,62 @@ export function OutilsSection() {
               <a
                 key={tool.label}
                 href="/compas.html"
-                className="group relative flex flex-col overflow-hidden rounded-3xl bg-white p-6 transition-all duration-[600ms] ease-[cubic-bezier(0.22,1,0.36,1)] hover:-translate-y-3 hover:scale-[1.02] hover:[box-shadow:0_40px_80px_-20px_oklch(0.6_0.18_230/0.45),0_0_0_1px_oklch(0.6_0.18_230/0.25),0_0_60px_-10px_oklch(0.7_0.15_220/0.4)]"
+                className="group relative flex flex-col overflow-hidden rounded-3xl bg-white p-6 transition-all duration-500 ease-[cubic-bezier(0.22,1,0.36,1)] hover:-translate-y-1.5 hover:[box-shadow:0_24px_50px_-20px_oklch(0.55_0.15_230/0.28),0_0_0_1px_oklch(0.6_0.15_230/0.18)]"
                 style={{
                   boxShadow:
-                    "0 10px 30px -15px oklch(0.4 0.1 230 / 0.18), 0 0 0 1px oklch(0.9 0.02 225)",
-                  transformStyle: "preserve-3d",
+                    "0 10px 30px -15px oklch(0.4 0.1 230 / 0.15), 0 0 0 1px oklch(0.92 0.015 225)",
                 }}
               >
-                {/* animated gradient border on hover */}
+                {/* subtle top gradient line on hover */}
                 <div
                   aria-hidden
-                  className="pointer-events-none absolute inset-0 rounded-3xl opacity-0 transition-opacity duration-500 group-hover:opacity-100"
+                  className="pointer-events-none absolute inset-x-0 top-0 h-px scale-x-0 transition-transform duration-700 ease-out group-hover:scale-x-100"
                   style={{
                     background:
-                      "linear-gradient(135deg, oklch(0.7 0.18 220 / 0.15), transparent 40%, oklch(0.65 0.2 235 / 0.15))",
+                      "linear-gradient(90deg, transparent, oklch(0.6 0.18 230 / 0.7), transparent)",
                   }}
                 />
-                {/* radial shine on hover */}
+                {/* very subtle radial glow */}
                 <div
                   aria-hidden
-                  className="pointer-events-none absolute -top-1/3 left-1/2 h-[140%] w-[140%] -translate-x-1/2 scale-75 opacity-0 transition-all duration-700 group-hover:scale-100 group-hover:opacity-100"
+                  className="pointer-events-none absolute -top-1/4 left-1/2 h-[120%] w-[120%] -translate-x-1/2 opacity-0 transition-opacity duration-700 group-hover:opacity-100"
                   style={{
                     background:
-                      "radial-gradient(circle at 50% 30%, oklch(0.85 0.14 225 / 0.55) 0%, transparent 60%)",
+                      "radial-gradient(circle at 50% 20%, oklch(0.88 0.08 225 / 0.35) 0%, transparent 55%)",
                   }}
                 />
-                {/* diagonal sheen sweep */}
+                {/* discreet sheen sweep */}
                 <div
                   aria-hidden
                   className="pointer-events-none absolute inset-0 overflow-hidden rounded-3xl"
                 >
-                  <div className="absolute -inset-y-10 -left-1/2 w-2/3 rotate-12 bg-gradient-to-r from-transparent via-white to-transparent blur-md opacity-0 transition-all duration-[1100ms] ease-out group-hover:left-[130%] group-hover:opacity-90" />
-                </div>
-                {/* floating particles */}
-                <div aria-hidden className="pointer-events-none absolute inset-0 overflow-hidden rounded-3xl">
-                  <span className="absolute left-[15%] top-[70%] h-1.5 w-1.5 rounded-full opacity-0 transition-all duration-[1200ms] ease-out group-hover:-translate-y-16 group-hover:opacity-100" style={{ background: "oklch(0.7 0.18 225 / 0.7)" }} />
-                  <span className="absolute left-[40%] top-[80%] h-1 w-1 rounded-full opacity-0 transition-all delay-100 duration-[1400ms] ease-out group-hover:-translate-y-24 group-hover:opacity-100" style={{ background: "oklch(0.75 0.15 220 / 0.6)" }} />
-                  <span className="absolute left-[75%] top-[75%] h-2 w-2 rounded-full opacity-0 transition-all delay-200 duration-[1300ms] ease-out group-hover:-translate-y-20 group-hover:opacity-100" style={{ background: "oklch(0.65 0.2 235 / 0.6)" }} />
-                  <span className="absolute left-[60%] top-[85%] h-1 w-1 rounded-full opacity-0 transition-all delay-150 duration-[1500ms] ease-out group-hover:-translate-y-28 group-hover:opacity-100" style={{ background: "oklch(0.8 0.12 220 / 0.7)" }} />
+                  <div className="absolute -inset-y-10 -left-1/2 w-1/2 rotate-12 bg-gradient-to-r from-transparent via-white/60 to-transparent blur-md opacity-0 transition-all duration-[1100ms] ease-out group-hover:left-[120%] group-hover:opacity-100" />
                 </div>
 
                 {/* header row */}
                 <div className="relative z-10 flex items-center justify-between">
                   <div
-                    className="inline-flex items-center gap-2 rounded-full px-3 py-1.5 text-xs font-semibold transition-all duration-500 group-hover:px-4 group-hover:shadow-[0_6px_20px_-4px_oklch(0.6_0.18_230/0.45)]"
+                    className="inline-flex items-center gap-2 rounded-full px-3 py-1.5 text-xs font-semibold transition-colors duration-500 group-hover:[background:oklch(0.92_0.04_225)]"
                     style={{
                       background: "oklch(0.95 0.03 225)",
                       color: "oklch(0.45 0.15 230)",
                     }}
                   >
-                    <Icon className="h-3.5 w-3.5 transition-transform duration-500 group-hover:rotate-[360deg] group-hover:scale-110" strokeWidth={2.5} />
+                    <Icon className="h-3.5 w-3.5" strokeWidth={2.5} />
                     {tool.label}
                   </div>
                   <ArrowRight
-                    className="h-4 w-4 -translate-x-3 opacity-0 transition-all duration-500 ease-out group-hover:translate-x-0 group-hover:opacity-100"
+                    className="h-4 w-4 -translate-x-2 opacity-0 transition-all duration-500 ease-out group-hover:translate-x-0 group-hover:opacity-100"
                     style={{ color: "oklch(0.6 0.18 230)" }}
                   />
                 </div>
 
-                {/* 3D image */}
-                <div className="relative mt-2 flex h-56 items-center justify-center [perspective:1000px]">
+                {/* image */}
+                <div className="relative mt-2 flex h-56 items-center justify-center">
                   <div
                     aria-hidden
-                    className="absolute inset-x-6 bottom-4 h-8 rounded-full blur-2xl transition-all duration-700 group-hover:h-12 group-hover:scale-110 group-hover:opacity-100"
-                    style={{ background: "oklch(0.6 0.18 230 / 0.4)" }}
+                    className="absolute inset-x-6 bottom-4 h-8 rounded-full blur-2xl transition-all duration-700 group-hover:h-10 group-hover:opacity-100"
+                    style={{ background: "oklch(0.6 0.18 230 / 0.28)" }}
                   />
                   <img
                     src={tool.image}
@@ -156,13 +148,13 @@ export function OutilsSection() {
                     width={1024}
                     height={1024}
                     loading="lazy"
-                    className="relative h-full w-auto object-contain drop-shadow-xl transition-all duration-[700ms] ease-[cubic-bezier(0.22,1,0.36,1)] group-hover:-translate-y-3 group-hover:scale-[1.12] group-hover:[transform:translateY(-12px)_scale(1.12)_rotateX(8deg)_rotateY(-6deg)] group-hover:drop-shadow-[0_25px_35px_oklch(0.5_0.15_230/0.45)]"
+                    className="relative h-full w-auto object-contain drop-shadow-xl transition-all duration-700 ease-[cubic-bezier(0.22,1,0.36,1)] group-hover:-translate-y-1.5 group-hover:scale-[1.04]"
                   />
                 </div>
 
                 {/* footer accent */}
                 <div
-                  className="mt-2 text-xs font-semibold uppercase tracking-wider transition-all duration-500 group-hover:translate-x-1"
+                  className="mt-2 text-xs font-semibold uppercase tracking-wider"
                   style={{ color: "oklch(0.55 0.05 240)" }}
                 >
                   {tool.accent}
