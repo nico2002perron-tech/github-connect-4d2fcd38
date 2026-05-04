@@ -75,12 +75,31 @@ export function OutilsSection() {
               <a
                 key={tool.label}
                 href="/compas.html"
-                className="group relative flex flex-col overflow-hidden rounded-3xl p-6 transition-all duration-500 hover:-translate-y-2"
+                className="group relative flex flex-col overflow-hidden rounded-3xl p-6 transition-all duration-500 ease-out hover:-translate-y-3 hover:[box-shadow:0_30px_60px_-20px_oklch(0_0_0/0.55),0_0_0_1px_oklch(1_0_0/0.08),0_0_40px_oklch(0.55_0.08_185/0.35)]"
                 style={{
                   background: "var(--gradient-card)",
                   boxShadow: "var(--shadow-card)",
                 }}
               >
+                {/* radial shine backdrop */}
+                <div
+                  aria-hidden
+                  className="pointer-events-none absolute -top-1/3 left-1/2 h-[120%] w-[120%] -translate-x-1/2 opacity-60 transition-opacity duration-700 group-hover:opacity-100"
+                  style={{
+                    background:
+                      "radial-gradient(circle at 50% 30%, oklch(0.55 0.08 185 / 0.35) 0%, transparent 55%)",
+                  }}
+                />
+                {/* diagonal sheen sweep */}
+                <div
+                  aria-hidden
+                  className="pointer-events-none absolute inset-0 overflow-hidden rounded-3xl"
+                >
+                  <div
+                    className="absolute -inset-y-10 -left-1/2 w-1/2 rotate-12 bg-gradient-to-r from-transparent via-white/50 to-transparent blur-md opacity-0 transition-all duration-1000 ease-out group-hover:left-[120%] group-hover:opacity-70"
+                  />
+                </div>
+
                 {/* header row */}
                 <div className="relative z-10 flex items-center justify-between">
                   <div
