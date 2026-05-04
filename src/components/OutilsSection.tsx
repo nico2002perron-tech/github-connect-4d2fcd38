@@ -131,7 +131,7 @@ export function OutilsSection() {
                 </div>
 
                 {/* 3D image */}
-                <div className="relative mt-2 flex h-56 items-center justify-center">
+                <div className="relative mt-2 flex h-56 items-center justify-center [perspective:1000px]">
                   <div
                     aria-hidden
                     className="absolute inset-x-6 bottom-4 h-8 rounded-full blur-2xl transition-all duration-500 group-hover:h-10 group-hover:opacity-90"
@@ -143,9 +143,34 @@ export function OutilsSection() {
                     width={1024}
                     height={1024}
                     loading="lazy"
-                    className="relative h-full w-auto object-contain drop-shadow-xl transition-transform duration-700 ease-out group-hover:scale-[1.08] group-hover:-rotate-2"
+                    className={`relative h-full w-auto object-contain drop-shadow-xl float-idle ${tool.animClass}`}
                   />
+                  {tool.label === "Objectifs" && (
+                    <>
+                      <svg
+                        aria-hidden
+                        viewBox="0 0 100 12"
+                        className="arrow-fly absolute left-1/2 top-1/2 h-3 w-24 -translate-x-1/2 -translate-y-1/2"
+                      >
+                        <line x1="5" y1="6" x2="85" y2="6" stroke="white" strokeWidth="3" strokeLinecap="round" />
+                        <polygon points="85,2 95,6 85,10" fill="oklch(0.6 0.18 230)" />
+                        <line x1="2" y1="2" x2="8" y2="6" stroke="white" strokeWidth="2" strokeLinecap="round" />
+                        <line x1="2" y1="10" x2="8" y2="6" stroke="white" strokeWidth="2" strokeLinecap="round" />
+                      </svg>
+                      <svg
+                        aria-hidden
+                        viewBox="0 0 100 12"
+                        className="arrow-fly arrow-fly-2 absolute left-1/2 top-1/2 h-3 w-20 -translate-x-1/2 -translate-y-[40%]"
+                      >
+                        <line x1="5" y1="6" x2="85" y2="6" stroke="white" strokeWidth="3" strokeLinecap="round" />
+                        <polygon points="85,2 95,6 85,10" fill="oklch(0.6 0.18 230)" />
+                        <line x1="2" y1="2" x2="8" y2="6" stroke="white" strokeWidth="2" strokeLinecap="round" />
+                        <line x1="2" y1="10" x2="8" y2="6" stroke="white" strokeWidth="2" strokeLinecap="round" />
+                      </svg>
+                    </>
+                  )}
                 </div>
+
 
                 {/* footer accent */}
                 <div
